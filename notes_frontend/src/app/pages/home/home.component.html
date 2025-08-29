@@ -1,0 +1,16 @@
+<app-header (search)="onSearch($event)"></app-header>
+<div class="layout">
+  <app-sidebar
+    [notes]="notes()"
+    [selectedId]="selected()?.id || null"
+    (select)="onSelect($event)"
+    (create)="onCreate()"
+  ></app-sidebar>
+
+  <app-note-editor
+    [note]="selected()"
+    [allTags]="tags()"
+    (save)="onSave($event)"
+    (remove)="onDelete()"
+  ></app-note-editor>
+</div>

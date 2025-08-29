@@ -1,0 +1,28 @@
+<header class="header card">
+  <div class="left">
+    <div class="brand">
+      <div class="logo">📝</div>
+      <div class="title">Notes</div>
+    </div>
+    <div class="search">
+      <input
+        class="input"
+        type="text"
+        placeholder="Search notes..."
+        [ngModel]="query()"
+        (ngModelChange)="query.set($event)"
+        (keyup.enter)="onSearch()">
+      <button class="btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+  <div class="right" *ngIf="user(); else guest">
+    <div class="user">
+      <img *ngIf="user()?.avatarUrl" [src]="user()?.avatarUrl!" alt="avatar">
+      <div class="name">{{ user()?.displayName || user()?.email }}</div>
+    </div>
+    <button class="btn ghost" (click)="logout()">Logout</button>
+  </div>
+  <ng-template #guest>
+    <a class="btn ghost" routerLink="/auth/login">Login</a>
+  </ng-template>
+</header>

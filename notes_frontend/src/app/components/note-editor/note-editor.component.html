@@ -1,0 +1,33 @@
+<div class="editor card" *ngIf="hasNote(); else empty">
+  <div class="head">
+    <input class="input title" placeholder="Title" [ngModel]="title()" (ngModelChange)="title.set($event)" />
+    <div class="actions">
+      <button class="btn secondary" (click)="onSave()">Save</button>
+      <button class="btn accent" (click)="onDelete()">Delete</button>
+    </div>
+  </div>
+  <textarea class="textarea content" rows="16" placeholder="Write your note..." [ngModel]="content()" (ngModelChange)="content.set($event)"></textarea>
+
+  <div class="meta-grid">
+    <div class="section">
+      <label>Category</label>
+      <input class="input" placeholder="e.g., Work, Personal" [ngModel]="category()" (ngModelChange)="category.set($event)" />
+    </div>
+    <div class="section">
+      <label>Tags</label>
+      <div class="tags">
+        <button type="button" class="tag" [class.active]="tagSelected(t)" (click)="onToggleTag(t)" *ngFor="let t of allTags">
+          <span class="dot" [style.background]="t.color || '#e5e7eb'"></span>
+          {{ t.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty card">
+    <div class="emoji">✨</div>
+    <div>Select or create a note to get started</div>
+  </div>
+</ng-template>
